@@ -42,12 +42,11 @@ function renderProducts(listItems) {
 }
 
 // Async await
-const getProductsList = async() => {
+const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
-  products = data;
 
-  return renderProducts();
+  return renderProducts(data);
 }
 
 getProductsList();
