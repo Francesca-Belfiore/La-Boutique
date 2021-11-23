@@ -49,11 +49,11 @@ strong {
 }
 
 .wrapper .__hero {
-  position: relative;
   background: rgba(0,0,0,0.335);
   top: 0;
   height: 350px;
   width: 100%;
+  z-index: 1;
 }
 
 .wrapper .__hero .intestazione {
