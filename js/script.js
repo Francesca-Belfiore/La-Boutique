@@ -76,7 +76,7 @@ const wrapperProducts = document.querySelector(".wrapper__products");
 //per il carrello
 let cartList = [];
 
-const localStorageTot = localStorage.getItem("totCartitems");
+let localStorageTot = localStorage.getItem("totCartitems");
 const cartBtn = document.querySelector(".cartBtn");
 const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCart = document.querySelector(".clearCart");
@@ -87,5 +87,6 @@ getProductsList();
 
 clearCart.addEventListener("click", () => {
   cartList.length = 0;
+  localStorageTot = 0;
   setCartProductsNum();
 });
