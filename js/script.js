@@ -34,7 +34,7 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
       modal.style.bottom = "-100px";
     }, 2500);
     localStorage.setItem("totCartitems", (cartList.length + parseInt(localStorageTot)));
-    localStorage.setItem("totCartPrice", (cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)));
+    localStorage.setItem("totCartPrice", (cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2));
   });
 }
 
