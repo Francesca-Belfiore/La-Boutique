@@ -80,7 +80,7 @@ const getProductsList = async () => {
 let productList = [];
 const wrapperProducts = document.querySelector(".wrapper__products");
 
-//per il carrello
+// per il carrello
 let cartList = [];
 let cartPrice = [];
 
