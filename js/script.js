@@ -1,6 +1,6 @@
 // let myCart = [];
 function setCartProductsNum () {
-  return (cartProductsNum.textContent = `Numero prodotti: ${cartList.length + parseInt(localStorageTot)}, prezzo totale: ${cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)} $`);
+  return (cartProductsNum.textContent = `Numero prodotti: ${cartList.length + parseInt(localStorageTot)}, prezzo totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $`);
 }
 
 function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
