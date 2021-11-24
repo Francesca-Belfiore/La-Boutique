@@ -1,20 +1,28 @@
-let myCart = [];
-let cartPrice = [];
+// let myCart = [];
+// let cartPrice = [];
 
-function createProduct(parent, imgUrl, productTitle, textPrice) {
+function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   const product = document.createElement("div");
   product.className = "product";
+  product.setAttribute("id", idProduct);
 
   createImg(product, imgUrl, productTitle);
   createText(product, productTitle, textPrice);
   parent.appendChild(product);
 
   product.addEventListener("click", () => {
-    myCart.push(productTitle);
-    cartPrice.push(parseFloat(textPrice));
-    let total = cartPrice.reduce((sum, current) => sum + current);
-    console.log("Cart:", myCart.join("; "), "- Price:", total, "$");
-  })
+    // myCart.push(productTitle);
+    // cartPrice.push(parseFloat(textPrice));
+    // let total = cartPrice.reduce((sum, current) => sum + current);
+    // console.log("Cart:", myCart.join("; "), "- Price:", total, "$");
+
+    cartList.push(
+      productList.find(
+        (product) => parseInt(e.currentTarget.id) === product.id
+      )
+    );
+    alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.lenght}`);
+  });
 }
 
 function createImg(parent, imgUrl, productTitle) {
@@ -35,16 +43,6 @@ function createText(parent, productTitle, textPrice) {
   parent.append(title, price);
 }
 
-// fetch("https://fakestoreapi.com/products") // <== importare la lista prodotti in modo remoto
-//   .then((response) => response.json())
-//   .then((data) => {
-//     products = data;
-//     renderProducts();
-//   });
-// let products = [];
-
-const wrapperProducts = document.querySelector(".wrapper__products");
-
 function renderProducts(listItems) {
   listItems.map((product) => {
     createProduct(wrapperProducts, product.image, product.title, product.price);
@@ -55,8 +53,21 @@ function renderProducts(listItems) {
 const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
+  productList = data;
+  // productList = data.map((product) => {
+  //   product.quantity = 0;
+  //   return product
+  // });
+  // productList = [...data, {}]
+
 
   return renderProducts(data);
 }
+
+const wrapperProducts = document.querySelector(".wrapper__products");
+// const cartBtn= documnt.querySelector(".cartBtn");
+
+const cartList= [];
+let productList = [];
 
 getProductsList();
