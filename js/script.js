@@ -27,7 +27,12 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
     );
     setCartProductsNum();
     alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
-    localStorage.setItem("totCartitems", (cartList.length + localStorageTot));
+
+    if (localStorageTot != 0) {
+      localStorage.setItem("totCartitems", (cartList.length + localStorageTot));
+    } else {
+      localStorage.setItem("totCartitems", (cartList.length));
+    }
   });
 }
 
