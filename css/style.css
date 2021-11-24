@@ -179,7 +179,7 @@ strong {
 
   left: 10px;
   bottom: -100px;
-  z-index: 8;
+  z-index: 1;
   width: 200px;
 
   transition: all 0.5s ease;

@@ -90,7 +90,7 @@ const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCart = document.querySelector(".clearCart");
 const modal = document.querySelector(".modal");
 
-//flusso genrale
+//flusso generale
 cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`;
 getProductsList();
 
