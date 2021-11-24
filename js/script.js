@@ -1,8 +1,6 @@
 // let myCart = [];
-// let cartPrice = [];
-
 function setCartProductsNum () {
-  return (cartProductsNum.textContent = `Numero prodotti: ${cartList.length + parseInt(localStorageTot)}`);
+  return (cartProductsNum.textContent = `Numero prodotti: ${cartList.length + parseInt(localStorageTot)}, prezzo totale: ${cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)} $`);
 }
 
 function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
@@ -16,8 +14,12 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
 
   product.addEventListener("click", (e) => {
     // myCart.push(productTitle);
-    // cartPrice.push(parseFloat(textPrice));
-    // let total = cartPrice.reduce((sum, current) => sum + current);
+    
+    cartPrice.push(parseFloat(textPrice));
+    let total = cartPrice.reduce((sum, current) => sum + current);
+
+    localStorage.setItem("totCartPrice", total);
+
     // console.log("Cart:", myCart.join("; "), "- Price:", total, "$");
 
     cartList.push(
@@ -32,6 +34,7 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
       modal.style.bottom = "-100px";
     }, 2500);
     localStorage.setItem("totCartitems", (cartList.length + parseInt(localStorageTot)));
+    localStorage.setItem("totCartPrice", (cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)));
   });
 }
 
@@ -79,24 +82,36 @@ const wrapperProducts = document.querySelector(".wrapper__products");
 
 //per il carrello
 let cartList = [];
+let cartPrice = [];
 
 if (localStorage.getItem("totCartitems") === null) {
   localStorage.setItem("totCartitems", 0);
 }
+if (localStorage.getItem("totCartPrice") === null) {
+  localStorage.setItem("totCartPrice", 0);
+}
 
 let localStorageTot = localStorage.getItem("totCartitems");
+let localStoragePrice = localStorage.getItem("totCartPrice");
+
 const cartBtn = document.querySelector(".cartBtn");
 const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCart = document.querySelector(".clearCart");
 const modal = document.querySelector(".modal");
 
 //flusso generale
-cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}`;
+cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}, prezzo totale: ${localStoragePrice} $`;
 getProductsList();
 
 clearCart.addEventListener("click", () => {
+  
   cartList.length = 0;
   localStorageTot = 0;
   localStorage.setItem("totCartitems", 0);
+
+  cartPrice = [0];
+  localStoragePrice = 0;
+  localStorage.setItem("totCartPrice", 0);
+
   setCartProductsNum();
 });
