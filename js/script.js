@@ -1,6 +1,5 @@
-// let myCart = [];
-function setCartProductsNum () {
-  return (cartProductsNum.textContent = `Numero prodotti: ${cartList.length + parseInt(localStorageTot)}, prezzo totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $`);
+function setCartProductsNum() {
+  cartProductsNum.textContent = `Numero prodotti: ${cartList.length}, prezzo totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $`;
 }
 
 function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
@@ -13,27 +12,30 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
   parent.appendChild(product);
 
   product.addEventListener("click", (e) => {
-    // myCart.push(productTitle);
-    
+
+    const localStorageValue = localStorage.getItem("totCartitems");
+    if (localStorageValue) {
+      cartList = JSON.parse(localStorageValue);
+    }
+
     cartPrice.push(parseFloat(textPrice));
     let total = cartPrice.reduce((sum, current) => sum + current);
 
     localStorage.setItem("totCartPrice", total);
 
-    // console.log("Cart:", myCart.join("; "), "- Price:", total, "$");
-
     cartList.push(
-      productList.find(
+      productsList.find(
         (product) => parseInt(e.currentTarget.id) === product.id
       )
     );
     setCartProductsNum();
-    // alert(`Prodotto aggiunto al carrello, numero prodotti: ${cartList.length}`);
+    
     modal.style.bottom = "10px";
     setTimeout(() => {
       modal.style.bottom = "-100px";
-    }, 2500);
-    localStorage.setItem("totCartitems", (cartList.length + parseInt(localStorageTot)));
+    }, 2500)
+
+    localStorage.setItem("totCartitems", JSON.stringify(cartList));
     localStorage.setItem("totCartPrice", (cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2));
   });
 }
@@ -58,7 +60,7 @@ function createText(parent, productTitle, textPrice) {
 
 function renderProducts(listItems) {
   listItems.map((product) => {
-    createProduct(wrapperProducts, product.image, product.title, product.price);
+    createProduct(wrapperProducts, product.image, product.title, product.price, product.id);
   });
 }
 
@@ -66,52 +68,49 @@ function renderProducts(listItems) {
 const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
   const data = await res.json();
-  productList = data;
+  productsList = data;
 
-  // Per aggiungere una quantità al prodotto
-  // productList = data.map((product) => {
+  // Nella eventualità di aggiungere una quantità per prodotto
+  // productsList = data.map((product) => {
   //   product.quantity = 0;
-  //   return product
+  //   return product;
   // });
 
   return renderProducts(data);
-}
+};
 
-let productList = [];
+let productsList = [];
 const wrapperProducts = document.querySelector(".wrapper__products");
 
-// per il carrello
+// Parte inerente alla logica del carrello
 let cartList = [];
 let cartPrice = [];
 
-if (localStorage.getItem("totCartitems") === null) {
-  localStorage.setItem("totCartitems", 0);
-}
 if (localStorage.getItem("totCartPrice") === null) {
   localStorage.setItem("totCartPrice", 0);
 }
 
-let localStorageTot = localStorage.getItem("totCartitems");
+const localStorageTot = localStorage.getItem("totCartitems");
 let localStoragePrice = localStorage.getItem("totCartPrice");
 
 const cartBtn = document.querySelector(".cartBtn");
 const cartProductsNum = document.querySelector(".cartProductsNum");
-const clearCart = document.querySelector(".clearCart");
+const clearCartBtn = document.querySelector(".clearCart");
 const modal = document.querySelector(".modal");
 
-//flusso generale
-cartProductsNum.textContent = `Numero prodotti: ${localStorageTot}, prezzo totale: ${localStoragePrice} $`;
+// Flusso generale
+let parsedTotCardItemsLen = JSON.parse(localStorage.getItem("totCartitems"))?.length || 0;
+
+cartProductsNum.textContent = `Numero prodotti: ${parsedTotCardItemsLen || 0}, prezzo totale: ${parseFloat(localStoragePrice).toFixed(2)} $`;
 getProductsList();
 
-clearCart.addEventListener("click", () => {
-  
+// Svuota carrello
+clearCartBtn.addEventListener("click", () => {
   cartList.length = 0;
-  localStorageTot = 0;
-  localStorage.setItem("totCartitems", 0);
+  localStorage.removeItem("totCartitems");
 
   cartPrice = [0];
   localStoragePrice = 0;
-  localStorage.setItem("totCartPrice", 0);
-
+  localStorage.removeItem("totCartPrice");
   setCartProductsNum();
 });
