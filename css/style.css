@@ -106,16 +106,23 @@ strong {
   font-size: 1.5rem;
 }
 
-.cartBanner .clearCart {
+.cartBanner button {
   border: 0;
   background: transparent;
   /* text-shadow: 2px 2px 2px rgba(255,255,255,0.801); */
   cursor: pointer;
   margin-right: 10px;
+  font-family: "Mohave", sans-serif;
+  font-size: 1rem;
+}
+
+.cartBanner button:hover {
+  background-color: rgba(0, 0, 0, 0.150);
 }
 
 .cartBanner .clearCart:hover {
   transform: scale(1.6);
+  background-color: transparent;
 }
 
 .wrapper__titles {
