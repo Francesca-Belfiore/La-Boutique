@@ -107,10 +107,10 @@ const wrapperProducts = document.querySelector(".wrapper__products");
 
 // Parte inerente alla logica del carrello
 let cartList = [];
-let cartPrice = [];
+let cartPrice = [0];
 
 if (localStorage.getItem("totCartPrice") === null) {
-  localStorage.setItem("totCartPrice", 0);
+  localStorage.setItem("totCartPrice", [0]);
 }
 
 const localStorageTot = localStorage.getItem("totCartitems");
@@ -176,5 +176,5 @@ function renderCart() {
     articleNames.push(articles.title);
   }
 
-  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Prezzo: ${parseFloat(localStoragePrice).toFixed(2)} $</p>`;
+  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Prezzo: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
 }
