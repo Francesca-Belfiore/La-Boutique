@@ -176,5 +176,5 @@ function renderCart() {
     articleNames.push(articles.title);
   }
 
-  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Prezzo: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
+  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${[...new Set(articleNames)].join("<br><br>")}</p><hr><p>Prezzo: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
 }
