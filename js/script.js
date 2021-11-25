@@ -37,6 +37,8 @@ function createProduct(parent, imgUrl, productTitle, textPrice, idProduct) {
 
     localStorage.setItem("totCartitems", JSON.stringify(cartList));
     localStorage.setItem("totCartPrice", (cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2));
+
+    renderCart();
   });
 }
 
@@ -127,6 +129,7 @@ getProductsList();
 
 // Svuota carrello
 clearCartBtn.addEventListener("click", () => {
+
   cartList.length = 0;
   localStorage.removeItem("totCartitems");
 
@@ -134,6 +137,8 @@ clearCartBtn.addEventListener("click", () => {
   localStoragePrice = 0;
   localStorage.removeItem("totCartPrice");
   setCartProductsNum();
+
+  document.querySelector(".showCart").innerHTML = `Il carrello è vuoto...`;
 });
 
 // Cambia recensione
@@ -154,3 +159,22 @@ function cycleReview() {
 
 cycleReview();
 setInterval(cycleReview, 9000);
+
+// Mostra carrello
+cartBtn.addEventListener("click", () => {
+  document.querySelector(".showCart").classList.toggle("invisible");
+
+  renderCart();
+});
+
+// Render carrello
+function renderCart() {
+  let articles = JSON.parse(localStorage.getItem("totCartitems")||0);
+  const articleNames = [];
+
+  for (articles of articles) {
+    articleNames.push(articles.title);
+  }
+
+  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Prezzo: ${parseFloat(localStoragePrice).toFixed(2)} $</p>`;
+}

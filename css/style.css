@@ -223,10 +223,7 @@ strong {
   background: #d88359;
   padding: 20px;
   border-radius: 5px;
-
-  transition: all 0.5s ease;
   
-  display: inline-flex;
   width: 20%;
   margin-top: -85px;
 }
@@ -237,4 +234,5 @@ strong {
 
 .invisible {
   display: none;
+  transition: all 0.35s ease;
 }
