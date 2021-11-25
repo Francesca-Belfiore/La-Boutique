@@ -76,6 +76,27 @@ const getProductsList = async () => {
   //   return product;
   // });
 
+  const alphBtn = document.querySelector(".alphBtn");
+  alphBtn.addEventListener("click", () => {
+    productsList.sort((a, b) => a.title.localeCompare(b.title));
+    wrapperProducts.innerHTML = "";
+    renderProducts(data);
+  });
+
+  const priceUpBtn = document.querySelector(".priceUpBtn");
+  priceUpBtn.addEventListener("click", () => {
+    productsList.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    wrapperProducts.innerHTML = "";
+    renderProducts(data);
+  });
+
+  const priceDownBtn = document.querySelector(".priceDownBtn");
+  priceDownBtn.addEventListener("click", () => {
+    productsList.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    wrapperProducts.innerHTML = "";
+    renderProducts(data);
+  });
+
   return renderProducts(data);
 };
 
