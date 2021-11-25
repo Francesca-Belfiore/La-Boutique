@@ -24,6 +24,7 @@
         <button class="priceUpBtn">💹 Ordina per prezzo crescente</button>
         <button class="priceDownBtn">📉 Ordina per prezzo decrescente</button>
 
+        <button class="cartBtn">🛒</button>
         <p class="cartProductsNum">Numero prodotti: 0</p>
         <button class="clearCart">❌</button>
       </div>
@@ -32,7 +33,10 @@
         <h2>La Boutique</h2>
       </div>
 
-      <div class="wrapper__products"></div>
+      <div class="wrapperOfWrappers">
+        <div class="wrapper__products"></div>
+        <div class="showCart invisible">Il carrello è vuoto...</div>
+      </div>
 
       <div class="reviews">
         <hr>
@@ -43,6 +47,8 @@
     </div>
     
     <div class="modal">Prodotto aggiunto al carrello!</div>
+
+    
 
     <script src="./js/script.js" type="module"></script>
   </body>
