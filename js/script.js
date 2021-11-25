@@ -135,3 +135,22 @@ clearCartBtn.addEventListener("click", () => {
   localStorage.removeItem("totCartPrice");
   setCartProductsNum();
 });
+
+// Cambia recensione
+const reviewArr = [
+  {avatar: "https://img.icons8.com/cotton/50/000000/smiling-face-icon.png", message: "Ottimi prodotti e un servizio cordiale e veloce: fantastico!"},
+  {avatar: "https://img.icons8.com/cotton/50/000000/zany-face-icon.png", message: "Finalmente un negozio gestito veramente bene. Ormai compro solo qui!"},
+  {avatar: "https://img.icons8.com/cotton/50/000000/winking-face-icon.png", message: "Offerte e prodotti di qualità, con le offerte si risparmia davvero!"}
+];
+
+function cycleReview() {
+
+  reviewArr.forEach((review, i) => {
+    setTimeout(() => {
+      document.querySelector(".review").innerHTML = `<img src="${review.avatar}"><p>${review.message}</p>`;
+    }, i * 3000);
+  });
+}
+
+cycleReview();
+setInterval(cycleReview, 9000);
