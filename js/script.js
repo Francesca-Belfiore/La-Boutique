@@ -66,6 +66,23 @@ function renderProducts(listItems) {
   });
 }
 
+// RICERCA PRODOTTI
+function handleFilterSearch() {
+
+  document
+    .querySelectorAll(".product")
+    .forEach((product) => wrapperProducts.removeChild(product));
+
+  renderProducts(
+    productsList.filter((product) =>
+      product.title
+        .toLowerCase()
+        .includes(inputFilterSearch.value.toLowerCase())
+    )
+  );
+
+} 
+
 // Async await
 const getProductsList = async () => {
   const res = await fetch("https://fakestoreapi.com/products");
@@ -120,6 +137,9 @@ const cartBtn = document.querySelector(".cartBtn");
 const cartProductsNum = document.querySelector(".cartProductsNum");
 const clearCartBtn = document.querySelector(".clearCart");
 const modal = document.querySelector(".modal");
+
+const searchBtn = document.querySelector(".searchBtn");
+const inputFilterSearch = document.querySelector(".inputFilterSearch");
 
 // Flusso generale
 let parsedTotCardItemsLen = JSON.parse(localStorage.getItem("totCartitems"))?.length || 0;
@@ -178,3 +198,6 @@ function renderCart() {
 
   document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p class="stuff">${articleNames.join("<br><br>")}</p><hr><p>Totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
 }
+
+searchBtn.addEventListener("click", handleFilterSearch);
+document.addEventListener("input", handleFilterSearch);
