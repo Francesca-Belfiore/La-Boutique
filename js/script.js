@@ -176,5 +176,5 @@ function renderCart() {
     articleNames.push(articles.price + " $" + " - " + articles.title); //+ `<img src="${articles.image}">`
   }
 
-  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
+  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p class="stuff">${articleNames.join("<br><br>")}</p><hr><p>Totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
 }
