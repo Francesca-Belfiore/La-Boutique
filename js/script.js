@@ -173,8 +173,8 @@ function renderCart() {
   const articleNames = [];
 
   for (articles of articles) {
-    articleNames.push(articles.title);
+    articleNames.push(articles.price + " $" + " - " + articles.title); //+ `<img src="${articles.image}">`
   }
 
-  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Prezzo: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
+  document.querySelector(".showCart").innerHTML = `<p>Articoli:</><p>${articleNames.join("<br><br>")}</p><hr><p>Totale: ${(cartPrice.reduce((sum, current) => sum + current) + parseFloat(localStoragePrice)).toFixed(2)} $</p>`;
 }

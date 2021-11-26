@@ -226,6 +226,7 @@ strong {
   
   width: 20%;
   margin-top: -85px;
+  transition: color, width 0.35s ease;
 }
 
 .wrapperOfWrappers {
@@ -233,6 +234,8 @@ strong {
 }
 
 .invisible {
-  display: none;
-  transition: all 0.35s ease;
+  color: transparent;
+  width: 0;
+  transition: color, width 0.35s ease;
+  padding: 0;
 }
