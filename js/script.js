@@ -68,7 +68,6 @@ function renderProducts(listItems) {
 
 // RICERCA PRODOTTI
 function handleFilterSearch() {
-  // wrapperProducts.classList.add("sideViewAnim");
 
   document
     .querySelectorAll(".product")
@@ -82,9 +81,6 @@ function handleFilterSearch() {
     )
   );
 
-  // setTimeout(() => {
-  //   wrapperProducts.classList.remove("sideViewAnim");
-  // })
 } 
 
 // Async await
@@ -204,3 +200,4 @@ function renderCart() {
 }
 
 searchBtn.addEventListener("click", handleFilterSearch);
+document.addEventListener("input", handleFilterSearch);
