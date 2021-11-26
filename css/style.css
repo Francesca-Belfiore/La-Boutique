@@ -157,6 +157,7 @@ strong {
   flex-wrap: wrap;
   justify-content: center;
   width: fit-content;
+  min-width: 80%;
 }
 
 .product {
@@ -262,5 +263,13 @@ strong {
   width: 0;
   transition: color, width 0.35s ease;
   padding: 0;
+  opacity: 0;
 }
 
+/* .inputFilterSearch, .labelFilterSearch {
+
+} */
+
+/* .sideViewAnim {
+  opacity: 0;
+} */
